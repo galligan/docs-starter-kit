@@ -1,0 +1,210 @@
+# Writing Content
+
+Learn how to write effective documentation using MDX with Nextra and shadcn/ui components.
+
+## MDX Basics
+
+MDX lets you use JSX components in your markdown content. This means you can write regular markdown and embed React components wherever needed.
+
+### Basic Markdown Syntax
+
+<Card>
+  <CardHeader>
+    <CardTitle>Markdown Elements</CardTitle>
+  </CardHeader>
+  <CardContent className="prose dark:prose-invert">
+    ```markdown
+    # Heading 1
+    ## Heading 2
+    ### Heading 3
+    
+    **Bold text** and *italic text*
+    
+    - Unordered list item
+    - Another item
+      - Nested item
+    
+    1. Ordered list
+    2. Second item
+    
+    > Blockquote
+    
+    [Link text](https://example.com)
+    
+    ![Alt text](/image.png)
+    ```
+  </CardContent>
+</Card>
+
+## Using Components
+
+You can use any shadcn/ui component directly in your MDX files:
+
+<Tabs defaultValue="example" className="mt-6">
+  <TabsList>
+    <TabsTrigger value="example">Example</TabsTrigger>
+    <TabsTrigger value="code">MDX Code</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="example">
+    <Alert>
+      <AlertTitle>Pro Tip</AlertTitle>
+      <AlertDescription>
+        Components are pre-imported in MDX files - just use them!
+      </AlertDescription>
+    </Alert>
+  </TabsContent>
+  
+  <TabsContent value="code">
+    ```mdx
+    <Alert>
+      <AlertTitle>Pro Tip</AlertTitle>
+      <AlertDescription>
+        Components are pre-imported in MDX files - just use them!
+      </AlertDescription>
+    </Alert>
+    ```
+  </TabsContent>
+</Tabs>
+
+## Code Blocks
+
+Nextra provides syntax highlighting for code blocks:
+
+### Basic Code Block
+
+```javascript
+function greet(name) {
+  console.log(`Hello, ${name}!`);
+}
+
+greet('World');
+```
+
+### Code Block with Title
+
+```typescript filename="utils/greeting.ts"
+export function greet(name: string): void {
+  console.log(`Hello, ${name}!`);
+}
+```
+
+### Code Block with Line Highlighting
+
+```jsx {3-5}
+function MyComponent() {
+  return (
+    <Card>
+      <CardTitle>Hello</CardTitle>
+      <CardContent>World</CardContent>
+    </Card>
+  );
+}
+```
+
+## Frontmatter
+
+Add metadata to your pages using frontmatter:
+
+```yaml
+---
+title: "My Page Title"
+description: "A brief description for SEO"
+---
+```
+
+## Best Practices
+
+<div className="space-y-4 mt-6">
+  <Card>
+    <CardHeader>
+      <CardTitle>✅ Do</CardTitle>
+    </CardHeader>
+    <CardContent>
+      - Use clear, descriptive headings
+      - Break content into logical sections
+      - Include code examples
+      - Use components to enhance readability
+      - Add alt text to images
+    </CardContent>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>❌ Don't</CardTitle>
+    </CardHeader>
+    <CardContent>
+      - Create walls of text
+      - Skip heading levels (h1 → h3)
+      - Overuse components
+      - Forget to test your MDX
+      - Use unclear link text like "click here"
+    </CardContent>
+  </Card>
+</div>
+
+## Advanced Features
+
+### Callouts with Components
+
+<Alert className="mt-6">
+  <AlertTitle>💡 Info</AlertTitle>
+  <AlertDescription>
+    Use Alert components for important information.
+  </AlertDescription>
+</Alert>
+
+<Alert variant="destructive" className="mt-4">
+  <AlertTitle>⚠️ Warning</AlertTitle>
+  <AlertDescription>
+    Use the destructive variant for warnings.
+  </AlertDescription>
+</Alert>
+
+### Interactive Examples
+
+<Card className="mt-6">
+  <CardHeader>
+    <CardTitle>Try It Yourself</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <div className="space-y-4">
+      <div>
+        <Label htmlFor="demo">Enter your name:</Label>
+        <Input id="demo" placeholder="John Doe" />
+      </div>
+      <Button>Submit</Button>
+    </div>
+  </CardContent>
+</Card>
+
+### Tables
+
+Use the Table component for structured data:
+
+<Table className="mt-6">
+  <TableHeader>
+    <TableRow>
+      <TableHead>Feature</TableHead>
+      <TableHead>Supported</TableHead>
+      <TableHead>Notes</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>MDX</TableCell>
+      <TableCell>✅</TableCell>
+      <TableCell>Full support</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Components</TableCell>
+      <TableCell>✅</TableCell>
+      <TableCell>All shadcn/ui components</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Syntax Highlighting</TableCell>
+      <TableCell>✅</TableCell>
+      <TableCell>Via Shiki</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>

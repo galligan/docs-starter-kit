@@ -1,0 +1,337 @@
+# Examples
+
+See Docs Starter Kit in action with these example implementations.
+
+## Documentation Sites Built with This Template
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+  <Card>
+    <CardHeader>
+      <CardTitle>API Documentation</CardTitle>
+      <CardDescription>RESTful API documentation with interactive examples</CardDescription>
+    </CardHeader>
+    <CardContent>
+      Perfect for documenting your backend services with:
+      - Endpoint references
+      - Request/response examples
+      - Authentication guides
+      - Rate limiting info
+    </CardContent>
+    <CardFooter>
+      <Button asChild variant="outline" size="sm">
+        <a href="/examples/api-docs">View Example</a>
+      </Button>
+    </CardFooter>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>Component Library</CardTitle>
+      <CardDescription>Document your React component library</CardDescription>
+    </CardHeader>
+    <CardContent>
+      Showcase components with:
+      - Live previews
+      - Props documentation
+      - Usage examples
+      - Accessibility notes
+    </CardContent>
+    <CardFooter>
+      <Button asChild variant="outline" size="sm">
+        <a href="/examples/component-library">View Example</a>
+      </Button>
+    </CardFooter>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>Product Documentation</CardTitle>
+      <CardDescription>User guides and tutorials</CardDescription>
+    </CardHeader>
+    <CardContent>
+      Create comprehensive docs with:
+      - Getting started guides
+      - Feature tutorials
+      - FAQ sections
+      - Troubleshooting
+    </CardContent>
+    <CardFooter>
+      <Button asChild variant="outline" size="sm">
+        <a href="/examples/product-docs">View Example</a>
+      </Button>
+    </CardFooter>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>Technical Blog</CardTitle>
+      <CardDescription>Developer blog with MDX</CardDescription>
+    </CardHeader>
+    <CardContent>
+      Write technical content with:
+      - Code examples
+      - Interactive demos
+      - Series navigation
+      - Author profiles
+    </CardContent>
+    <CardFooter>
+      <Button asChild variant="outline" size="sm">
+        <a href="/examples/blog">View Example</a>
+      </Button>
+    </CardFooter>
+  </Card>
+</div>
+
+## Example Layouts
+
+### Documentation with Sidebar
+
+<Card className="mt-8">
+  <CardContent className="p-0">
+    <div className="flex h-96 overflow-hidden rounded-lg">
+      <div className="w-64 bg-muted p-4 border-r">
+        <div className="space-y-2">
+          <div className="font-semibold">Getting Started</div>
+          <div className="text-sm text-muted-foreground pl-4 space-y-1">
+            <div>Installation</div>
+            <div>Configuration</div>
+            <div>First Steps</div>
+          </div>
+          <div className="font-semibold mt-4">Guides</div>
+          <div className="text-sm text-muted-foreground pl-4 space-y-1">
+            <div>Basic Usage</div>
+            <div>Advanced Topics</div>
+          </div>
+        </div>
+      </div>
+      <div className="flex-1 p-8">
+        <h1 className="text-3xl font-bold mb-4">Documentation Layout</h1>
+        <p className="text-muted-foreground">
+          This layout includes a sidebar navigation, main content area, and optional table of contents.
+        </p>
+      </div>
+    </div>
+  </CardContent>
+</Card>
+
+### Landing Page Style
+
+<Card className="mt-8">
+  <CardContent className="p-0">
+    <div className="h-96 overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 p-12">
+      <div className="max-w-2xl mx-auto text-center space-y-6">
+        <h1 className="text-4xl font-bold">Your Product Name</h1>
+        <p className="text-xl text-muted-foreground">
+          A compelling description of what your product does and why it's amazing.
+        </p>
+        <div className="flex gap-4 justify-center">
+          <Button size="lg">Get Started</Button>
+          <Button size="lg" variant="outline">Learn More</Button>
+        </div>
+      </div>
+    </div>
+  </CardContent>
+</Card>
+
+## Code Examples
+
+### API Endpoint Documentation
+
+<Card className="mt-8">
+  <CardHeader>
+    <CardTitle>GET /api/users/:id</CardTitle>
+    <CardDescription>Retrieve a user by ID</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Tabs defaultValue="request">
+      <TabsList>
+        <TabsTrigger value="request">Request</TabsTrigger>
+        <TabsTrigger value="response">Response</TabsTrigger>
+        <TabsTrigger value="example">Example</TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="request">
+        ```bash
+        curl -X GET https://api.example.com/users/123 \
+          -H "Authorization: Bearer YOUR_TOKEN"
+        ```
+      </TabsContent>
+      
+      <TabsContent value="response">
+        ```json
+        {
+          "id": "123",
+          "name": "John Doe",
+          "email": "john@example.com",
+          "created_at": "2024-01-01T00:00:00Z"
+        }
+        ```
+      </TabsContent>
+      
+      <TabsContent value="example">
+        ```javascript
+        const response = await fetch('https://api.example.com/users/123', {
+          headers: {
+            'Authorization': 'Bearer YOUR_TOKEN'
+          }
+        });
+        
+        const user = await response.json();
+        console.log(user);
+        ```
+      </TabsContent>
+    </Tabs>
+  </CardContent>
+</Card>
+
+### Component Documentation
+
+<Card className="mt-8">
+  <CardHeader>
+    <CardTitle>Button Component</CardTitle>
+    <CardDescription>A customizable button component</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <div className="space-y-6">
+      <div>
+        <h4 className="font-semibold mb-2">Props</h4>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Prop</TableHead>
+              <TableHead>Type</TableHead>
+              <TableHead>Default</TableHead>
+              <TableHead>Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>variant</TableCell>
+              <TableCell>string</TableCell>
+              <TableCell>"default"</TableCell>
+              <TableCell>Button style variant</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>size</TableCell>
+              <TableCell>string</TableCell>
+              <TableCell>"default"</TableCell>
+              <TableCell>Button size</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>disabled</TableCell>
+              <TableCell>boolean</TableCell>
+              <TableCell>false</TableCell>
+              <TableCell>Disable the button</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+      
+      <div>
+        <h4 className="font-semibold mb-2">Examples</h4>
+        <div className="flex gap-2 flex-wrap">
+          <Button>Default</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="destructive">Destructive</Button>
+        </div>
+      </div>
+    </div>
+  </CardContent>
+</Card>
+
+## Interactive Examples
+
+### Form Example
+
+<Card className="mt-8">
+  <CardHeader>
+    <CardTitle>Contact Form</CardTitle>
+    <CardDescription>Example of an interactive form with validation</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <Label htmlFor="first-name">First Name</Label>
+          <Input id="first-name" placeholder="John" />
+        </div>
+        <div>
+          <Label htmlFor="last-name">Last Name</Label>
+          <Input id="last-name" placeholder="Doe" />
+        </div>
+      </div>
+      <div>
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" type="email" placeholder="john@example.com" />
+      </div>
+      <div>
+        <Label htmlFor="message">Message</Label>
+        <Textarea id="message" placeholder="Your message here..." />
+      </div>
+      <Button className="w-full">Send Message</Button>
+    </div>
+  </CardContent>
+</Card>
+
+### Settings Panel
+
+<Card className="mt-8">
+  <CardHeader>
+    <CardTitle>Settings</CardTitle>
+    <CardDescription>Example settings panel with various controls</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <Label htmlFor="notifications">Email Notifications</Label>
+          <p className="text-sm text-muted-foreground">Receive email updates</p>
+        </div>
+        <Switch id="notifications" />
+      </div>
+      
+      <Separator />
+      
+      <div className="space-y-2">
+        <Label>Theme</Label>
+        <Select>
+          <SelectTrigger>
+            <SelectValue placeholder="Select theme" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="light">Light</SelectItem>
+            <SelectItem value="dark">Dark</SelectItem>
+            <SelectItem value="system">System</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      
+      <Separator />
+      
+      <div className="space-y-2">
+        <Label>Language</Label>
+        <div className="space-y-2">
+          <div className="flex items-center space-x-2">
+            <Checkbox id="en" defaultChecked />
+            <Label htmlFor="en">English</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox id="es" />
+            <Label htmlFor="es">Spanish</Label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </CardContent>
+</Card>
+
+## Get Started with These Examples
+
+<Alert className="mt-8">
+  <AlertTitle>💡 Tip</AlertTitle>
+  <AlertDescription>
+    Copy any of these examples into your MDX files and customize them for your needs. All components are pre-configured and ready to use!
+  </AlertDescription>
+</Alert>

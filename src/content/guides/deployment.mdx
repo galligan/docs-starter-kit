@@ -1,0 +1,335 @@
+# Deployment
+
+Learn how to build and deploy your Docs Starter Kit site to various platforms.
+
+## Build Process
+
+First, build your site for production:
+
+```bash
+pnpm run build
+```
+
+This will:
+- Compile your TypeScript code
+- Process your MDX files
+- Generate static HTML pages
+- Optimize assets for production
+
+<Alert className="mt-4">
+  <AlertTitle>Build Output</AlertTitle>
+  <AlertDescription>
+    The build creates an optimized production build in the `.next` folder, ready for deployment.
+  </AlertDescription>
+</Alert>
+
+## Deployment Options
+
+<Tabs defaultValue="vercel" className="mt-6">
+  <TabsList className="grid w-full grid-cols-4">
+    <TabsTrigger value="vercel">Vercel</TabsTrigger>
+    <TabsTrigger value="netlify">Netlify</TabsTrigger>
+    <TabsTrigger value="github">GitHub Pages</TabsTrigger>
+    <TabsTrigger value="static">Static Export</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="vercel">
+    <Card>
+      <CardHeader>
+        <CardTitle>Deploy to Vercel</CardTitle>
+        <CardDescription>The easiest way to deploy Next.js apps</CardDescription>
+      </CardHeader>
+      <CardContent>
+        ### One-Click Deploy
+        
+        1. Push your code to GitHub
+        2. Visit [vercel.com](https://vercel.com)
+        3. Import your repository
+        4. Deploy with default settings
+        
+        ### CLI Deploy
+        
+        ```bash
+        npm i -g vercel
+        vercel
+        ```
+        
+        ### Environment Variables
+        
+        Set these in your Vercel dashboard:
+        - `NEXT_PUBLIC_SITE_URL` - Your production URL
+        - Any API keys your site needs
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="netlify">
+    <Card>
+      <CardHeader>
+        <CardTitle>Deploy to Netlify</CardTitle>
+        <CardDescription>Alternative deployment platform</CardDescription>
+      </CardHeader>
+      <CardContent>
+        ### Deploy Settings
+        
+        1. Connect your GitHub repository
+        2. Configure build settings:
+        
+        ```toml filename="netlify.toml"
+        [build]
+          command = "pnpm run build"
+          publish = ".next"
+        
+        [[plugins]]
+          package = "@netlify/plugin-nextjs"
+        ```
+        
+        3. Deploy your site
+        
+        ### Environment Variables
+        
+        Add in Netlify dashboard under "Site settings" → "Environment variables"
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="github">
+    <Card>
+      <CardHeader>
+        <CardTitle>Deploy to GitHub Pages</CardTitle>
+        <CardDescription>Free hosting for static sites</CardDescription>
+      </CardHeader>
+      <CardContent>
+        ### Setup Static Export
+        
+        1. Update `next.config.mjs`:
+        
+        ```javascript filename="next.config.mjs"
+        export default withNextra({
+          output: 'export',
+          images: {
+            unoptimized: true
+          },
+          basePath: '/your-repo-name'
+        })
+        ```
+        
+        2. Create GitHub Action:
+        
+        ```yaml filename=".github/workflows/deploy.yml"
+        name: Deploy to GitHub Pages
+        
+        on:
+          push:
+            branches: [main]
+        
+        jobs:
+          deploy:
+            runs-on: ubuntu-latest
+            steps:
+              - uses: actions/checkout@v3
+              - uses: pnpm/action-setup@v2
+                with:
+                  version: 8
+              - uses: actions/setup-node@v3
+                with:
+                  node-version: 18
+                  cache: 'pnpm'
+              - run: pnpm install
+              - run: pnpm run build
+              - uses: peaceiris/actions-gh-pages@v3
+                with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./out
+        ```
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="static">
+    <Card>
+      <CardHeader>
+        <CardTitle>Static Export</CardTitle>
+        <CardDescription>Deploy to any static hosting</CardDescription>
+      </CardHeader>
+      <CardContent>
+        ### Configure for Static Export
+        
+        1. Update `next.config.mjs`:
+        
+        ```javascript
+        export default withNextra({
+          output: 'export',
+          images: {
+            unoptimized: true
+          }
+        })
+        ```
+        
+        2. Build the static site:
+        
+        ```bash
+        pnpm run build
+        ```
+        
+        3. The static files will be in the `out` directory
+        
+        ### Deploy to Any Host
+        
+        Upload the `out` directory to:
+        - AWS S3 + CloudFront
+        - Google Cloud Storage
+        - Azure Static Web Apps
+        - Any web server
+      </CardContent>
+    </Card>
+  </TabsContent>
+</Tabs>
+
+## Post-Deployment
+
+### Setting Up Search
+
+For static exports, set up Pagefind for search:
+
+<Card className="mt-6">
+  <CardContent className="pt-6">
+    1. Install Pagefind:
+    ```bash
+    pnpm add -D pagefind
+    ```
+    
+    2. Add post-build script:
+    ```json filename="package.json"
+    {
+      "scripts": {
+        "postbuild": "pagefind --site out --output-path out/_pagefind"
+      }
+    }
+    ```
+    
+    3. Search will be available after deployment
+  </CardContent>
+</Card>
+
+### Custom Domain
+
+<Tabs defaultValue="vercel-domain" className="mt-6">
+  <TabsList>
+    <TabsTrigger value="vercel-domain">Vercel</TabsTrigger>
+    <TabsTrigger value="netlify-domain">Netlify</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="vercel-domain">
+    1. Go to your project settings
+    2. Navigate to "Domains"
+    3. Add your custom domain
+    4. Update DNS records as instructed
+  </TabsContent>
+  
+  <TabsContent value="netlify-domain">
+    1. Go to "Site settings" → "Domain management"
+    2. Click "Add custom domain"
+    3. Follow DNS configuration steps
+    4. Enable HTTPS (automatic)
+  </TabsContent>
+</Tabs>
+
+## Performance Optimization
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+  <Card>
+    <CardHeader>
+      <CardTitle>🚀 Build Optimization</CardTitle>
+    </CardHeader>
+    <CardContent>
+      - Enable ISR for dynamic content
+      - Use `next/image` for images
+      - Minimize JavaScript bundles
+      - Enable compression
+    </CardContent>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>🌐 CDN Setup</CardTitle>
+    </CardHeader>
+    <CardContent>
+      - Use Vercel Edge Network
+      - Configure cache headers
+      - Enable image optimization
+      - Set up redirects
+    </CardContent>
+  </Card>
+</div>
+
+## Monitoring
+
+After deployment, monitor your site:
+
+<Card className="mt-6">
+  <CardHeader>
+    <CardTitle>Recommended Tools</CardTitle>
+  </CardHeader>
+  <CardContent>
+    - **Analytics**: Vercel Analytics, Google Analytics
+    - **Performance**: Lighthouse, WebPageTest
+    - **Uptime**: UptimeRobot, Pingdom
+    - **Error Tracking**: Sentry
+  </CardContent>
+</Card>
+
+## Continuous Deployment
+
+Set up automatic deployments:
+
+<Alert className="mt-6">
+  <AlertTitle>GitHub Integration</AlertTitle>
+  <AlertDescription>
+    Both Vercel and Netlify automatically deploy when you push to your main branch.
+  </AlertDescription>
+</Alert>
+
+### Branch Previews
+
+- **Vercel**: Automatic preview deployments for PRs
+- **Netlify**: Deploy previews for every PR
+- **GitHub Pages**: Use environments for staging
+
+## Troubleshooting
+
+<Collapsible className="mt-6">
+  <CollapsibleTrigger asChild>
+    <Button variant="outline" className="w-full justify-between">
+      Common Issues
+      <span>↓</span>
+    </Button>
+  </CollapsibleTrigger>
+  <CollapsibleContent className="mt-2">
+    <div className="space-y-4">
+      <Card>
+        <CardHeader>
+          <CardTitle>Build Failures</CardTitle>
+        </CardHeader>
+        <CardContent>
+          - Check Node.js version matches locally
+          - Ensure all dependencies are in package.json
+          - Clear cache and rebuild
+          - Check environment variables
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardHeader>
+          <CardTitle>404 Errors</CardTitle>
+        </CardHeader>
+        <CardContent>
+          - Verify basePath configuration
+          - Check file names match routes
+          - Ensure proper static export config
+          - Clear CDN cache
+        </CardContent>
+      </Card>
+    </div>
+  </CollapsibleContent>
+</Collapsible>

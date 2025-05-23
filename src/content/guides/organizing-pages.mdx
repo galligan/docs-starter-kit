@@ -1,0 +1,307 @@
+# Organizing Pages
+
+Learn how to structure your documentation with Nextra's file-based routing and navigation system.
+
+## File-Based Routing
+
+Nextra uses a file-system based router. Files in `src/content/` automatically become routes:
+
+<Card className="mt-6">
+  <CardContent className="pt-6">
+    ```
+    src/content/
+    ├── index.mdx           → /
+    ├── getting-started.mdx → /getting-started
+    ├── guides/
+    │   ├── _meta.json
+    │   ├── intro.mdx       → /guides/intro
+    │   └── advanced.mdx    → /guides/advanced
+    └── api/
+        ├── _meta.json
+        └── reference.mdx   → /api/reference
+    ```
+  </CardContent>
+</Card>
+
+## Navigation with _meta.json
+
+The `_meta.json` file controls navigation structure and page metadata:
+
+### Basic Navigation
+
+```json filename="_meta.json"
+{
+  "index": "Home",
+  "getting-started": "Getting Started",
+  "guides": "Guides",
+  "api": "API Reference"
+}
+```
+
+### Advanced Configuration
+
+```json filename="_meta.json"
+{
+  "index": {
+    "title": "Home",
+    "type": "page",
+    "display": "hidden"  // Hide from sidebar
+  },
+  "guides": {
+    "title": "Guides",
+    "type": "page"
+  },
+  "-- Divider": {
+    "type": "separator",
+    "title": "Resources"
+  },
+  "github": {
+    "title": "GitHub →",
+    "type": "page",
+    "href": "https://github.com",
+    "newWindow": true
+  }
+}
+```
+
+## Page Types
+
+<Tabs defaultValue="page" className="mt-6">
+  <TabsList>
+    <TabsTrigger value="page">Page</TabsTrigger>
+    <TabsTrigger value="folder">Folder</TabsTrigger>
+    <TabsTrigger value="separator">Separator</TabsTrigger>
+    <TabsTrigger value="link">External Link</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="page">
+    <Card>
+      <CardHeader>
+        <CardTitle>Regular Page</CardTitle>
+      </CardHeader>
+      <CardContent>
+        ```json
+        {
+          "my-page": {
+            "title": "My Page",
+            "type": "page"
+          }
+        }
+        ```
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="folder">
+    <Card>
+      <CardHeader>
+        <CardTitle>Folder with Sub-pages</CardTitle>
+      </CardHeader>
+      <CardContent>
+        Create a directory with its own `_meta.json`:
+        ```
+        guides/
+        ├── _meta.json
+        ├── intro.mdx
+        └── advanced.mdx
+        ```
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="separator">
+    <Card>
+      <CardHeader>
+        <CardTitle>Visual Separator</CardTitle>
+      </CardHeader>
+      <CardContent>
+        ```json
+        {
+          "-- API": {
+            "type": "separator",
+            "title": "API Reference"
+          }
+        }
+        ```
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="link">
+    <Card>
+      <CardHeader>
+        <CardTitle>External Link</CardTitle>
+      </CardHeader>
+      <CardContent>
+        ```json
+        {
+          "github": {
+            "title": "GitHub →",
+            "href": "https://github.com/...",
+            "newWindow": true
+          }
+        }
+        ```
+      </CardContent>
+    </Card>
+  </TabsContent>
+</Tabs>
+
+## Navigation Features
+
+### Breadcrumbs
+
+Nextra automatically generates breadcrumbs based on your folder structure:
+
+<Breadcrumb className="mt-6">
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/guides">Guides</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Organizing Pages</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+
+### Table of Contents
+
+Nextra automatically generates a table of contents from your headings:
+
+<Card className="mt-6">
+  <CardHeader>
+    <CardTitle>On This Page</CardTitle>
+  </CardHeader>
+  <CardContent>
+    - File-Based Routing
+    - Navigation with _meta.json
+    - Page Types
+    - Navigation Features
+    - Best Practices
+  </CardContent>
+</Card>
+
+## Organizing Complex Documentation
+
+### Example Structure
+
+<Card className="mt-6">
+  <CardContent className="pt-6">
+    ```
+    src/content/
+    ├── _meta.json              # Root navigation
+    ├── index.mdx               # Home page
+    ├── getting-started.mdx     # Single page
+    │
+    ├── guides/                 # Guide section
+    │   ├── _meta.json
+    │   ├── basics/
+    │   │   ├── _meta.json
+    │   │   ├── installation.mdx
+    │   │   └── configuration.mdx
+    │   └── advanced/
+    │       ├── _meta.json
+    │       ├── optimization.mdx
+    │       └── deployment.mdx
+    │
+    ├── api/                    # API docs
+    │   ├── _meta.json
+    │   ├── components/
+    │   │   ├── _meta.json
+    │   │   ├── button.mdx
+    │   │   └── card.mdx
+    │   └── hooks/
+    │       ├── _meta.json
+    │       └── use-theme.mdx
+    │
+    └── examples/               # Examples
+        ├── _meta.json
+        └── blog.mdx
+    ```
+  </CardContent>
+</Card>
+
+### Root _meta.json
+
+```json filename="src/content/_meta.json"
+{
+  "index": {
+    "title": "Documentation",
+    "type": "page"
+  },
+  "getting-started": "Getting Started",
+  "guides": "Guides",
+  "api": "API Reference",
+  "examples": "Examples",
+  "-- Support": {
+    "type": "separator"
+  },
+  "github": {
+    "title": "GitHub →",
+    "href": "https://github.com/...",
+    "newWindow": true
+  },
+  "discord": {
+    "title": "Discord →",
+    "href": "https://discord.gg/...",
+    "newWindow": true
+  }
+}
+```
+
+## Best Practices
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+  <Card>
+    <CardHeader>
+      <CardTitle>📁 Structure</CardTitle>
+    </CardHeader>
+    <CardContent>
+      - Group related content in folders
+      - Use clear, descriptive file names
+      - Keep nesting to 2-3 levels max
+      - Use index.mdx for section overviews
+    </CardContent>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>🏷️ Naming</CardTitle>
+    </CardHeader>
+    <CardContent>
+      - Use kebab-case for files
+      - Be consistent with naming
+      - Avoid special characters
+      - Keep URLs short and readable
+    </CardContent>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>🧭 Navigation</CardTitle>
+    </CardHeader>
+    <CardContent>
+      - Order pages logically
+      - Use separators to group sections
+      - Add external links sparingly
+      - Test navigation on mobile
+    </CardContent>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>📝 Content</CardTitle>
+    </CardHeader>
+    <CardContent>
+      - One topic per page
+      - Use consistent formatting
+      - Add cross-references
+      - Include next steps
+    </CardContent>
+  </Card>
+</div>

@@ -1,0 +1,238 @@
+# Getting Started
+
+Get your documentation site up and running with Docs Starter Kit in just a few minutes.
+
+## Prerequisites
+
+Before you begin, make sure you have the following installed:
+
+<Card className="mt-4">
+  <CardContent className="pt-6">
+    - **Node.js 18.17** or later
+    - **pnpm** (recommended) or npm/yarn
+    - **Git** for version control
+    - A code editor (VS Code recommended)
+  </CardContent>
+</Card>
+
+## Installation
+
+<Tabs defaultValue="template" className="mt-6">
+  <TabsList>
+    <TabsTrigger value="template">Use Template</TabsTrigger>
+    <TabsTrigger value="clone">Clone Repository</TabsTrigger>
+    <TabsTrigger value="manual">Manual Setup</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="template">
+    <div className="space-y-4">
+      <p>The easiest way to get started is by using the GitHub template:</p>
+      
+      1. Visit the [Docs Starter Kit repository](https://github.com/your-username/docs-starter-kit)
+      2. Click the "Use this template" button
+      3. Create a new repository from the template
+      4. Clone your new repository:
+      
+      ```bash
+      git clone https://github.com/your-username/your-docs-site
+      cd your-docs-site
+      pnpm install
+      ```
+    </div>
+  </TabsContent>
+  
+  <TabsContent value="clone">
+    <div className="space-y-4">
+      <p>Clone the repository directly:</p>
+      
+      ```bash
+      git clone https://github.com/your-username/docs-starter-kit
+      cd docs-starter-kit
+      pnpm install
+      ```
+      
+      <Alert>
+        <AlertDescription>
+          Remember to remove the existing git history and initialize your own:
+          `rm -rf .git && git init`
+        </AlertDescription>
+      </Alert>
+    </div>
+  </TabsContent>
+  
+  <TabsContent value="manual">
+    <div className="space-y-4">
+      <p>Create a new Next.js project and add the dependencies:</p>
+      
+      ```bash
+      pnpm create next-app@latest my-docs --typescript --tailwind --app
+      cd my-docs
+      pnpm add nextra nextra-theme-docs
+      pnpm dlx shadcn@latest init
+      ```
+    </div>
+  </TabsContent>
+</Tabs>
+
+## Project Structure
+
+Once installed, your project will have the following structure:
+
+```
+docs-starter-kit/
+├── src/
+│   ├── app/                 # Next.js App Router
+│   │   ├── layout.tsx       # Root layout
+│   │   └── [[...slug]]/     # Dynamic routes
+│   ├── content/             # Your MDX content
+│   │   ├── _meta.json       # Navigation config
+│   │   └── *.mdx            # Documentation pages
+│   ├── components/          # React components
+│   │   └── ui/              # shadcn/ui library
+│   ├── lib/                 # Utilities
+│   └── mdx-components.tsx   # MDX mappings
+├── next.config.mjs          # Next.js config
+├── tailwind.config.js       # Tailwind config
+└── package.json             # Dependencies
+```
+
+## Running the Development Server
+
+Start the development server with Turbopack:
+
+```bash
+pnpm run dev
+```
+
+<Alert className="mt-4">
+  <AlertTitle>🚀 Turbopack Enabled</AlertTitle>
+  <AlertDescription>
+    The development server uses Turbopack for faster builds and hot reload.
+  </AlertDescription>
+</Alert>
+
+Your documentation site will be available at [http://localhost:3000](http://localhost:3000).
+
+## Creating Your First Page
+
+1. Create a new MDX file in `src/content/`:
+
+```mdx filename="src/content/my-page.mdx"
+# My First Page
+
+This is my first documentation page using Docs Starter Kit!
+
+<Alert>
+  <AlertTitle>Hello!</AlertTitle>
+  <AlertDescription>
+    I can use shadcn/ui components directly in MDX!
+  </AlertDescription>
+</Alert>
+```
+
+2. Update `src/content/_meta.json` to add your page to the navigation:
+
+```json filename="src/content/_meta.json"
+{
+  "index": {
+    "title": "Home",
+    "type": "page"
+  },
+  "my-page": {
+    "title": "My Page",
+    "type": "page"
+  }
+}
+```
+
+3. Save and see your page appear in the navigation!
+
+## Using Components in MDX
+
+All shadcn/ui components are available in your MDX files without imports:
+
+<Card>
+  <CardHeader>
+    <CardTitle>Example Component Usage</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <Tabs defaultValue="preview">
+      <TabsList>
+        <TabsTrigger value="preview">Preview</TabsTrigger>
+        <TabsTrigger value="code">Code</TabsTrigger>
+      </TabsList>
+      <TabsContent value="preview">
+        <Button>Click me!</Button>
+      </TabsContent>
+      <TabsContent value="code">
+        <pre className="text-sm">
+          {`<Button>Click me!</Button>`}
+        </pre>
+      </TabsContent>
+    </Tabs>
+  </CardContent>
+</Card>
+
+## Customizing the Theme
+
+### Update Site Metadata
+
+Edit `src/app/layout.tsx` to customize your site's metadata:
+
+```tsx filename="src/app/layout.tsx"
+export const metadata = {
+  title: 'My Documentation',
+  description: 'Documentation for my awesome project',
+}
+
+const navbar = (
+  <Navbar
+    logo={<b>My Docs</b>}
+    projectLink="https://github.com/my-username/my-project"
+  />
+)
+```
+
+### Customize Colors
+
+The site uses Tailwind CSS v4 with OKLCH colors. Edit `src/app.css` to customize:
+
+```css filename="src/app.css"
+:root {
+  --primary: oklch(0.216 0.006 56.043);
+  --background: oklch(1 0 0);
+  /* ... other colors */
+}
+```
+
+## Next Steps
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+  <Card>
+    <CardHeader>
+      <CardTitle>📝 Writing Content</CardTitle>
+    </CardHeader>
+    <CardContent>
+      Learn MDX syntax and best practices for documentation.
+    </CardContent>
+    <CardFooter>
+      <Button asChild variant="outline" size="sm">
+        <a href="/guides/writing-content">Read Guide</a>
+      </Button>
+    </CardFooter>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>🎨 Component Reference</CardTitle>
+    </CardHeader>
+    <CardContent>
+      Explore all available components with examples.
+    </CardContent>
+    <CardFooter>
+      <Button asChild variant="outline" size="sm">
+        <a href="/components">Browse Components</a>
+      </Button>
+    </CardFooter>
+  </Card>
+</div>

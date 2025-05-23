@@ -1,0 +1,237 @@
+# Component Reference
+
+All shadcn/ui components are automatically available in your MDX files - no imports needed! This reference provides a comprehensive list of all components and their common usage patterns.
+
+## Quick Links
+
+- [Component Showcase](/components-showcase) - Interactive examples of all components
+- [Writing Content Guide](/guides/writing-content) - Learn how to use components in MDX
+
+## Component Categories
+
+### Layout Components
+
+#### Card
+A versatile container component for grouping related content.
+
+```mdx
+<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description text</CardDescription>
+  </CardHeader>
+  <CardContent>
+    Your content goes here
+  </CardContent>
+  <CardFooter>
+    <Button>Action</Button>
+  </CardFooter>
+</Card>
+```
+
+**Components**: `Card`, `CardHeader`, `CardFooter`, `CardTitle`, `CardDescription`, `CardContent`
+
+#### Sheet
+A sliding panel overlay for forms or additional content.
+
+**Components**: `Sheet`, `SheetContent`, `SheetDescription`, `SheetHeader`, `SheetTitle`, `SheetTrigger`, `SheetFooter`
+
+#### Other Layout
+- `Separator` - Visual divider between sections
+- `Collapsible`, `CollapsibleContent`, `CollapsibleTrigger` - Expandable content areas
+- `Sidebar` components - For navigation sidebars
+
+### Navigation Components
+
+#### Tabs
+Organize content into switchable sections.
+
+```mdx
+<Tabs defaultValue="tab1">
+  <TabsList>
+    <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+    <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1">Content 1</TabsContent>
+  <TabsContent value="tab2">Content 2</TabsContent>
+</Tabs>
+```
+
+**Components**: `Tabs`, `TabsContent`, `TabsList`, `TabsTrigger`
+
+#### Breadcrumb
+Shows the current page location in the site hierarchy.
+
+**Components**: `Breadcrumb`, `BreadcrumbItem`, `BreadcrumbLink`, `BreadcrumbList`, `BreadcrumbPage`, `BreadcrumbSeparator`
+
+#### Navigation Menu
+Complex dropdown navigation menus.
+
+**Components**: `NavigationMenu`, `NavigationMenuContent`, `NavigationMenuItem`, `NavigationMenuLink`, `NavigationMenuList`, `NavigationMenuTrigger`
+
+#### Pagination
+Page navigation for multi-page content.
+
+**Components**: `Pagination`, `PaginationContent`, `PaginationItem`, `PaginationLink`, `PaginationNext`, `PaginationPrevious`
+
+### Form Components
+
+#### Basic Inputs
+
+```mdx
+<div className="space-y-2">
+  <Label htmlFor="name">Name</Label>
+  <Input id="name" placeholder="Enter your name" />
+</div>
+```
+
+**Components**:
+- `Button` - Interactive buttons with multiple variants
+- `Input` - Text input fields
+- `Label` - Form field labels
+- `Textarea` - Multi-line text input
+- `Checkbox` - Checkbox input
+- `Switch` - Toggle switch
+
+#### Select
+Dropdown selection component.
+
+```mdx
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Choose option" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="1">Option 1</SelectItem>
+    <SelectItem value="2">Option 2</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+**Components**: `Select`, `SelectContent`, `SelectItem`, `SelectTrigger`, `SelectValue`
+
+### Data Display
+
+#### Table
+Display tabular data with sorting and filtering capabilities.
+
+```mdx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Column 1</TableHead>
+      <TableHead>Column 2</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Data 1</TableCell>
+      <TableCell>Data 2</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+**Components**: `Table`, `TableBody`, `TableCaption`, `TableCell`, `TableFooter`, `TableHead`, `TableHeader`, `TableRow`
+
+#### Other Display Components
+- `Badge` - Small status indicators
+- `Avatar`, `AvatarFallback`, `AvatarImage` - User avatars
+- `Skeleton` - Loading placeholder
+
+### Feedback Components
+
+#### Alert
+Display important messages to users.
+
+```mdx
+<Alert>
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    This is an important message.
+  </AlertDescription>
+</Alert>
+```
+
+**Components**: `Alert`, `AlertDescription`, `AlertTitle`
+
+#### Toast Notifications
+Use `Sonner` for toast notifications.
+
+### Overlay Components
+
+#### Dialog
+Modal dialogs for confirmations or forms.
+
+```mdx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Open Dialog</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogDescription>Dialog description</DialogDescription>
+    </DialogHeader>
+    <!-- Dialog content -->
+  </DialogContent>
+</Dialog>
+```
+
+**Components**: `Dialog`, `DialogContent`, `DialogDescription`, `DialogFooter`, `DialogHeader`, `DialogTitle`, `DialogTrigger`
+
+#### Dropdown Menu
+Context menus and dropdowns.
+
+**Components**: `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuTrigger`
+
+#### Popover
+Small overlay panels for additional information.
+
+**Components**: `Popover`, `PopoverContent`, `PopoverTrigger`
+
+#### Tooltip
+Hover tooltips for helpful information.
+
+```mdx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger>Hover me</TooltipTrigger>
+    <TooltipContent>
+      <p>Helpful tooltip text</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+**Components**: `Tooltip`, `TooltipContent`, `TooltipProvider`, `TooltipTrigger`
+
+#### Hover Card
+Rich content on hover.
+
+**Components**: `HoverCard`, `HoverCardContent`, `HoverCardTrigger`
+
+### Utility Components
+
+#### Command
+Command palette for searching and actions.
+
+**Components**: `Command`, `CommandDialog`, `CommandEmpty`, `CommandGroup`, `CommandInput`, `CommandItem`, `CommandList`, `CommandSeparator`
+
+## Best Practices
+
+1. **No Imports Needed**: All components are pre-imported in MDX files
+2. **Use Tailwind Classes**: Customize appearance with Tailwind utilities
+3. **Semantic HTML**: Components render accessible, semantic HTML
+4. **Composition**: Combine components to create complex interfaces
+5. **Responsive Design**: Components are mobile-friendly by default
+
+## Component Props
+
+Most components accept standard HTML attributes plus:
+- `className` - For Tailwind styling
+- `variant` - Different visual styles (buttons, badges, etc.)
+- `size` - Component sizing options
+- `asChild` - Render as a different element
+
+For detailed prop documentation, refer to the [shadcn/ui documentation](https://ui.shadcn.com).

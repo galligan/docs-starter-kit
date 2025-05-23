@@ -1,0 +1,156 @@
+# Docs Starter Kit
+
+Build beautiful documentation sites with Next.js 15, Nextra 4, Tailwind CSS v4, and shadcn/ui components.
+
+<div className="mt-8">
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-2xl">Quick Start</CardTitle>
+      <CardDescription>Get up and running in under 5 minutes</CardDescription>
+    </CardHeader>
+    <CardContent>
+      ```bash
+      # Clone the repository
+      git clone https://github.com/your-username/docs-starter-kit
+      cd docs-starter-kit
+      
+      # Install dependencies
+      pnpm install
+      
+      # Start development server
+      pnpm run dev
+      ```
+    </CardContent>
+  </Card>
+</div>
+
+## Why Docs Starter Kit?
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+  <Card>
+    <CardHeader>
+      <CardTitle>Modern Stack</CardTitle>
+    </CardHeader>
+    <CardContent>
+      Built on the latest Next.js 15 with App Router, Nextra 4, and Tailwind CSS v4.
+    </CardContent>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>Beautiful Components</CardTitle>
+    </CardHeader>
+    <CardContent>
+      All shadcn/ui components available directly in MDX files - no imports needed.
+    </CardContent>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>Developer Experience</CardTitle>
+    </CardHeader>
+    <CardContent>
+      TypeScript support, hot reload, and organized src directory structure.
+    </CardContent>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>Ready to Deploy</CardTitle>
+    </CardHeader>
+    <CardContent>
+      Optimized for static export and deployment to Vercel, Netlify, or any static host.
+    </CardContent>
+  </Card>
+</div>
+
+## Features at a Glance
+
+<Tabs defaultValue="tech" className="mt-8">
+  <TabsList className="grid w-full grid-cols-3">
+    <TabsTrigger value="tech">Tech Stack</TabsTrigger>
+    <TabsTrigger value="components">Components</TabsTrigger>
+    <TabsTrigger value="features">Features</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tech">
+    <Card>
+      <CardContent className="pt-6">
+        - **Next.js 15** - Latest React framework with App Router
+        - **Nextra 4** - Powerful documentation framework
+        - **Tailwind CSS v4** - Modern utility-first CSS
+        - **shadcn/ui** - Beautiful, accessible components
+        - **TypeScript** - Full type safety
+      </CardContent>
+    </Card>
+  </TabsContent>
+  <TabsContent value="components">
+    <Card>
+      <CardContent className="pt-6">
+        Over 28 shadcn/ui components ready to use:
+        - Alerts, Cards, Buttons, Badges
+        - Dialogs, Sheets, Popovers
+        - Forms, Inputs, Selects
+        - Tables, Tabs, Navigation
+        - And many more...
+      </CardContent>
+    </Card>
+  </TabsContent>
+  <TabsContent value="features">
+    <Card>
+      <CardContent className="pt-6">
+        - MDX support with component embedding
+        - Automatic navigation generation
+        - Dark mode support
+        - Code syntax highlighting
+        - Search ready (with Pagefind)
+        - SEO optimized
+      </CardContent>
+    </Card>
+  </TabsContent>
+</Tabs>
+
+## Next Steps
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+  <Card>
+    <CardHeader>
+      <CardTitle>📚 Read the Docs</CardTitle>
+    </CardHeader>
+    <CardContent>
+      Learn how to create pages, customize components, and deploy your site.
+    </CardContent>
+    <CardFooter>
+      <Button asChild className="w-full">
+        <a href="/getting-started">Get Started</a>
+      </Button>
+    </CardFooter>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>🎨 Browse Components</CardTitle>
+    </CardHeader>
+    <CardContent>
+      Explore all available shadcn/ui components with live examples.
+    </CardContent>
+    <CardFooter>
+      <Button asChild variant="outline" className="w-full">
+        <a href="/components">View Components</a>
+      </Button>
+    </CardFooter>
+  </Card>
+  
+  <Card>
+    <CardHeader>
+      <CardTitle>🚀 Deploy</CardTitle>
+    </CardHeader>
+    <CardContent>
+      Learn how to build and deploy your documentation site.
+    </CardContent>
+    <CardFooter>
+      <Button asChild variant="outline" className="w-full">
+        <a href="/deployment">Deployment Guide</a>
+      </Button>
+    </CardFooter>
+  </Card>
+</div>
