@@ -49,16 +49,27 @@ docs-starter-kit/
 │   │       └── page.tsx      # Renders MDX content
 │   ├── components/           
 │   │   └── ui/              # 28 pre-configured shadcn/ui components
+│   │       └── *.test.tsx   # Component unit tests
 │   ├── content/             # Your documentation (MDX files)
 │   │   ├── _meta.json       # Navigation structure
 │   │   ├── index.mdx        # Homepage
 │   │   └── guides/          # Nested sections
 │   ├── lib/                 # Utilities
+│   │   └── *.test.ts        # Utility tests
+│   ├── test/                # Test setup and helpers
+│   │   ├── setup.ts         # Vitest setup
+│   │   ├── mocks/           # Test mocks
+│   │   └── fixtures/        # Test fixtures
 │   ├── app.css             # Global styles + Tailwind v4
 │   └── mdx-components.tsx   # Component mappings
+├── e2e/                     # End-to-end tests (Playwright)
+├── .github/                 # GitHub configuration
+│   └── workflows/           # CI/CD workflows
 ├── next.config.mjs          # Next.js + Nextra config
 ├── postcss.config.mjs       # PostCSS for Tailwind v4
 ├── components.json          # shadcn/ui config
+├── vitest.config.ts         # Vitest configuration
+├── playwright.config.ts     # Playwright configuration
 └── package.json
 ```
 
@@ -186,11 +197,64 @@ Modify `src/app/layout.tsx` to customize:
 - Search functionality
 - Theme switching
 
+## Testing
+
+The project includes a comprehensive testing setup with Vitest for unit/integration tests and Playwright for end-to-end testing.
+
+### Unit Tests
+
+Unit tests are located next to the components they test:
+
+```
+src/components/ui/button.tsx
+src/components/ui/button.test.tsx
+```
+
+Run unit tests with:
+
+```bash
+pnpm test          # Run all tests
+pnpm test:watch    # Run in watch mode
+pnpm test:ui       # Open visual test UI
+pnpm test:coverage # Generate coverage report
+```
+
+### End-to-End Tests
+
+E2E tests are located in the `e2e` directory:
+
+```
+e2e/
+├── basic.spec.ts
+└── ... other test files
+```
+
+Run E2E tests with:
+
+```bash
+pnpm test:e2e              # Run all E2E tests
+pnpm test:e2e:chromium     # Run in Chromium only
+pnpm test:e2e:firefox      # Run in Firefox only
+pnpm test:e2e:webkit       # Run in WebKit only
+```
+
+### CI/CD Integration
+
+The project includes GitHub Actions workflows for automated testing on push and pull requests. See `.github/workflows/test.yml` for configuration.
+
 ## Scripts
 
 - `pnpm run dev` - Start development server with Turbopack
 - `pnpm run build` - Build for production
 - `pnpm run start` - Start production server
+- `pnpm run test` - Run unit tests with Vitest
+- `pnpm run test:watch` - Run unit tests in watch mode
+- `pnpm run test:ui` - Open Vitest UI for visual test monitoring
+- `pnpm run test:coverage` - Run tests with coverage reporting
+- `pnpm run test:e2e` - Run all E2E tests with Playwright
+- `pnpm run test:e2e:chromium` - Run E2E tests in Chromium
+- `pnpm run test:e2e:firefox` - Run E2E tests in Firefox
+- `pnpm run test:e2e:webkit` - Run E2E tests in WebKit
 - `pnpm dlx shadcn@latest add <component>` - Add new components
 
 ## Deployment
@@ -220,6 +284,8 @@ pnpm run build
 - [shadcn/ui](https://ui.shadcn.com/) - Component library
 - [React 19](https://react.dev/) - UI library
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Vitest](https://vitest.dev/) - Unit and integration testing
+- [Playwright](https://playwright.dev/) - End-to-end testing
 
 ## License
 
